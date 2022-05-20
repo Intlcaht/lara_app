@@ -39,9 +39,12 @@
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
             </div>
 
-            <div>
+            <div class="mt-4 flex">
                 <x-jet-label for="initials" value="{{ __('auth.Initials') }}" />
-                <x-jet-input id="initials" class="block mt-1 w-full" type="number" name="initials" :value="old('initials')" required autofocus autocomplete="initials" />
+                <div class="flex">
+                    <x-jet-input id="initials-mr" class="mt-1" type="radio" name="initials-mr" :value="old('initials')" />
+                    <x-jet-input id="initials-mrs" class="mt-1" type="radio" name="initials-mrs" :value="old('initials')" />
+                </div>
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

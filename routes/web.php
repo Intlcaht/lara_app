@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,11 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get('/__clockwork/{request:.+}', function ($request) {
+    $clockwork = Clockwork::init();
+    return new JsonResponse($clockwork->getMetadata($request));
+});
+
+Route::view('/powergrid', 'powergrid-demo');
+
