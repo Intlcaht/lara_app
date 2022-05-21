@@ -1,0 +1,13 @@
+{
+    "Delivery": true,
+    "Checkin": true,
+    "Services": true,
+    "Projects": true,
+    "Escrow": true,
+    "Adaptors": true,
+    "Payments": true,
+    "Auth": true,
+    "Orders": true,
+    "Earnings": true,
+    "Admin": true
+}

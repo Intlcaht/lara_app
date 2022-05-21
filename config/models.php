@@ -326,7 +326,7 @@ return [
         |
         */
 
-        'lower_table_name_first' => false,
+        'lower_table_name_first' => true,
 
         /*
         |--------------------------------------------------------------------------

@@ -1,0 +1,13 @@
+{
+    "name": "Adaptors",
+    "alias": "adaptors",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Adaptors\\Providers\\AdaptorsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

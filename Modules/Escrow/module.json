@@ -1,0 +1,13 @@
+{
+    "name": "Escrow",
+    "alias": "escrow",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Escrow\\Providers\\EscrowServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
