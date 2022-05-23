@@ -28,10 +28,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
-Route::get('/__clockwork/{request:.+}', function ($request) {
-    $clockwork = Clockwork::init();
-    return new JsonResponse($clockwork->getMetadata($request));
-});
+// Route::get('/__clockwork/{request:.+}', function ($request) {
+//     $clockwork = Clockwork::init();
+//     return new JsonResponse($clockwork->getMetadata($request));
+// });
 
 Route::view('/powergrid', 'powergrid-demo');
 

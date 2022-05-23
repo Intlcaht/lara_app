@@ -7,15 +7,14 @@
 namespace App\Models\Base;
 
 use App\Models\BaseModel;
-use App\Models\BillingProfileTransaction;
+use App\Models\BusinessProfileAdapter;
 use App\Models\CheckinUser;
-use App\Models\Commission;
+use App\Models\EscrowTransaction;
 use App\Models\Order;
+use App\Models\Service;
 use App\Traits\FormatDates;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -28,15 +27,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property float $amount
- * @property string $payment_id
  * @property string $description
- * @property string $transaction_u_id
  * @property string $order_u_id
+ * @property string $business_profile_adapter_u_id
+ * @property string $service_u_id
+ * @property string|null $escrow_transaction_u_id
  * 
  * @property CheckinUser|null $checkin_user
- * @property BillingProfileTransaction $transaction
  * @property Order $order
- * @property Collection|Commission[] $commissions_where_payments_id
+ * @property BusinessProfileAdapter $business_profile_adapter
+ * @property Service $service
+ * @property EscrowTransaction|null $escrow_transaction
  *
  * @package App\Models\Base
  */
@@ -51,10 +52,11 @@ class Payment extends BaseModel
 	const UPDATED_AT = 'updated_at';
 	const DELETED_AT = 'deleted_at';
 	const AMOUNT = 'amount';
-	const PAYMENT_ID = 'payment_id';
 	const DESCRIPTION = 'description';
-	const TRANSACTION_U_ID = 'transaction_u_id';
 	const ORDER_U_ID = 'order_u_id';
+	const BUSINESS_PROFILE_ADAPTER_U_ID = 'business_profile_adapter_u_id';
+	const SERVICE_U_ID = 'service_u_id';
+	const ESCROW_TRANSACTION_U_ID = 'escrow_transaction_u_id';
 	protected $connection = 'mysql';
 	protected $table = 'payments';
 
@@ -73,18 +75,23 @@ class Payment extends BaseModel
 		return $this->belongsTo(CheckinUser::class, \App\Models\Payment::CHECKIN_USER_U_ID, CheckinUser::U_ID);
 	}
 
-	public function transaction(): BelongsTo
-	{
-		return $this->belongsTo(BillingProfileTransaction::class, \App\Models\Payment::TRANSACTION_U_ID, BillingProfileTransaction::U_ID);
-	}
-
 	public function order(): BelongsTo
 	{
 		return $this->belongsTo(Order::class, \App\Models\Payment::ORDER_U_ID, Order::U_ID);
 	}
 
-	public function commissions_where_payments_id(): HasMany
+	public function business_profile_adapter(): BelongsTo
 	{
-		return $this->hasMany(Commission::class, Commission::PAYMENTSID);
+		return $this->belongsTo(BusinessProfileAdapter::class, \App\Models\Payment::BUSINESS_PROFILE_ADAPTER_U_ID, BusinessProfileAdapter::U_ID);
+	}
+
+	public function service(): BelongsTo
+	{
+		return $this->belongsTo(Service::class, \App\Models\Payment::SERVICE_U_ID, Service::U_ID);
+	}
+
+	public function escrow_transaction(): BelongsTo
+	{
+		return $this->belongsTo(EscrowTransaction::class, \App\Models\Payment::ESCROW_TRANSACTION_U_ID, EscrowTransaction::U_ID);
 	}
 }

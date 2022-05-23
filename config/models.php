@@ -287,7 +287,7 @@ return [
             'teams',
             'sessions',
             'personal_access_tokens',
-            'registrations'
+            'users'
         ],
 
         /*

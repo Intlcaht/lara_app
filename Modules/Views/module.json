@@ -1,0 +1,13 @@
+{
+    "name": "Views",
+    "alias": "views",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Views\\Providers\\ViewsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}

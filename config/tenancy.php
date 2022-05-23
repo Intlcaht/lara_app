@@ -12,7 +12,7 @@
  * @see https://github.com/hyn/multi-tenant
  */
 
-use Hyn\Tenancy\Database\Connection;
+//use Hyn\Tenancy\Database\Connection;
 
 return [
     /**
@@ -83,7 +83,7 @@ return [
          * @info If set to false will disable all tenant specific filesystem auto magic
          *       like the config, vendor overrides.
          */
-        'disk' => 's3',
+        'disk' => 'local',
 
         /**
          * Automatically generate a tenant directory based on the random id of the
@@ -110,7 +110,7 @@ return [
          * @see
          * @info set to true to enable.
          */
-        'auto-delete-tenant-directory' => false,
+        'auto-delete-tenant-directory' => true,
 
         /**
          * Time to cache websites in seconds. Set to false to disable.
@@ -150,7 +150,7 @@ return [
          * Abort application execution in case no hostname was identified. This will throw a
          * 404 not found in case the tenant hostname was not resolved.
          */
-        'abort-without-identified-hostname' => env('TENANCY_ABORT_WITHOUT_HOSTNAME', false),
+        'abort-without-identified-hostname' => env('TENANCY_ABORT_WITHOUT_HOSTNAME', true),
 
         /**
          * Time to cache hostnames in seconds. Set to false to disable.
@@ -183,8 +183,8 @@ return [
          * @var system-connection-name The database connection name to use for the global/system database.
          * @var tenant-connection-name The database connection name to use for the tenant database.
          */
-        'system-connection-name' => env('TENANCY_SYSTEM_CONNECTION_NAME', Connection::DEFAULT_SYSTEM_NAME),
-        'tenant-connection-name' => env('TENANCY_TENANT_CONNECTION_NAME', Connection::DEFAULT_TENANT_NAME),
+        // 'system-connection-name' => env('TENANCY_SYSTEM_CONNECTION_NAME', Connection::DEFAULT_SYSTEM_NAME),
+        // 'tenant-connection-name' => env('TENANCY_TENANT_CONNECTION_NAME', Connection::DEFAULT_TENANT_NAME),
 
         /**
          * The tenant division mode specifies to what database websites will be
@@ -287,7 +287,7 @@ return [
          * @info Set to false to disable.
          * @info Only deletes in case tenant database is set to be deleted.
          */
-        'auto-delete-tenant-database-user' => env('TENANCY_DATABASE_AUTO_DELETE_USER', false),
+        'auto-delete-tenant-database-user' => env('TENANCY_DATABASE_AUTO_DELETE_USER', true),
 
         /**
          * Define a list of classes that you wish to force onto the tenant or system connection.

@@ -7,7 +7,6 @@
 namespace App\Models\Base;
 
 use App\Models\BaseModel;
-use App\Models\Payment;
 use App\Models\Service;
 use App\Traits\FormatDates;
 use Carbon\Carbon;
@@ -29,10 +28,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property string|null $service_u_id
- * @property int|null $paymentsId
  * 
  * @property Service|null $service
- * @property Payment|null $payments_id
  *
  * @package App\Models\Base
  */
@@ -52,14 +49,12 @@ class Commission extends BaseModel
 	const UPDATED_AT = 'updated_at';
 	const DELETED_AT = 'deleted_at';
 	const SERVICE_U_ID = 'service_u_id';
-	const PAYMENTS_ID = 'paymentsId';
 	protected $connection = 'mysql';
 	protected $table = 'commissions';
 
 	protected $casts = [
 		self::ID => 'int',
-		self::VALUE => 'float',
-		self::PAYMENTSID => 'int'
+		self::VALUE => 'float'
 	];
 
 	protected $dates = [
@@ -70,10 +65,5 @@ class Commission extends BaseModel
 	public function service(): BelongsTo
 	{
 		return $this->belongsTo(Service::class, \App\Models\Commission::SERVICE_U_ID, Service::U_ID);
-	}
-
-	public function payments_id(): BelongsTo
-	{
-		return $this->belongsTo(Payment::class, \App\Models\Commission::PAYMENTSID);
 	}
 }

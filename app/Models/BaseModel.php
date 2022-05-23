@@ -5,17 +5,19 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
 /**
  * Undocumented class
  */
-class BaseModel extends Model
+class BaseModel extends Model implements Transformable
 {
     /**
      *
      */
     use HasFactory;
-
+    use TransformableTrait;
 
     public function makeUId($prefix = "ID"): string
     {

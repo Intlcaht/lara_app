@@ -9,5 +9,8 @@
     "Auth": true,
     "Orders": true,
     "Earnings": true,
-    "Admin": true
+    "Admin": true,
+    "Provider": true,
+    "Client": true,
+    "Views": true
 }

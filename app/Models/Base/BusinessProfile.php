@@ -6,14 +6,12 @@
 
 namespace App\Models\Base;
 
-use App\Models\BalanceSettlement;
 use App\Models\BaseModel;
-use App\Models\BillingProfile;
 use App\Models\Blog;
 use App\Models\BusinessAttachment;
 use App\Models\BusinessProfileAdapter;
 use App\Models\BusinessProfileService;
-use App\Models\CashOut;
+use App\Models\Escrow;
 use App\Models\Order;
 use App\Models\Service;
 use App\Models\ServiceTag;
@@ -23,13 +21,14 @@ use App\Models\UserBusinessProfile;
 use App\Traits\FormatDates;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class BusinessProfile
- * 
+ *
  * @property int $id
  * @property string $u_id
  * @property float|null $cap_percentage
@@ -42,14 +41,13 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property string $terms_and_conditions
- * 
- * @property Collection|BalanceSettlement[] $balance_settlements_where_user
- * @property Collection|BillingProfile[] $billing_profiles
+ * @property string|null $escrow_u_id
+ *
+ * @property Escrow|null $escrow
  * @property Collection|Blog[] $blogs
  * @property Collection|BusinessAttachment[] $business_attachments
  * @property Collection|BusinessProfileAdapter[] $business_profile_adapters_where_profile
  * @property Collection|Service[] $services
- * @property Collection|CashOut[] $cash_outs_where_user
  * @property Collection|Order[] $orders
  * @property Collection|ServiceTag[] $service_tags
  * @property Collection|User[] $users
@@ -72,7 +70,8 @@ class BusinessProfile extends BaseModel
 	const UPDATED_AT = 'updated_at';
 	const DELETED_AT = 'deleted_at';
 	const TERMS_AND_CONDITIONS = 'terms_and_conditions';
-	protected $connection = 'mysql';
+	const ESCROW_U_ID = 'escrow_u_id';
+	//sprotected $connection = 'mysql';
 	protected $table = 'business_profiles';
 
 	protected $casts = [
@@ -86,14 +85,9 @@ class BusinessProfile extends BaseModel
 		self::UPDATED_AT
 	];
 
-	public function balance_settlements_where_user(): HasMany
+	public function escrow(): BelongsTo
 	{
-		return $this->hasMany(BalanceSettlement::class, BalanceSettlement::USER_U_ID, BalanceSettlement::U_ID);
-	}
-
-	public function billing_profiles(): HasMany
-	{
-		return $this->hasMany(BillingProfile::class, BillingProfile::BUSINESS_PROFILE_U_ID, BillingProfile::U_ID);
+		return $this->belongsTo(Escrow::class, \App\Models\BusinessProfile::ESCROW_U_ID, Escrow::U_ID);
 	}
 
 	public function blogs(): HasMany
@@ -116,11 +110,6 @@ class BusinessProfile extends BaseModel
 		return $this->belongsToMany(Service::class, 'business_profile_service', Service::BUSINESS_PROFILESID, Service::SERVICESID)
 					->withPivot(BusinessProfileService::ID, BusinessProfileService::U_ID, BusinessProfileService::DELETED_AT)
 					->withTimestamps();
-	}
-
-	public function cash_outs_where_user(): HasMany
-	{
-		return $this->hasMany(CashOut::class, CashOut::USER_U_ID, CashOut::U_ID);
 	}
 
 	public function orders(): HasMany

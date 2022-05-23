@@ -10,18 +10,8 @@
             @csrf
 
             <div>
-                <x-jet-label for="first_name" value="{{ __('auth.First_Name') }}" />
-                <x-jet-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="first_name" />
-            </div>
-
-            <div>
-                <x-jet-label for="last_name" value="{{ __('auth.Last_Name') }}" />
-                <x-jet-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" />
-            </div>
-
-            <div>
-                <x-jet-label for="phone_number" value="{{ __('auth.Phone_Number') }}" />
-                <x-jet-input id="phone_number" class="block mt-1 w-full" type="number" name="phone_number" :value="old('phone_number')" required autofocus autocomplete="phone_number" />
+                <x-jet-label for="name" value="{{ __('Name') }}" />
+                <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
 
             <div class="mt-4">
@@ -37,14 +27,6 @@
             <div class="mt-4">
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4 flex">
-                <x-jet-label for="initials" value="{{ __('auth.Initials') }}" />
-                <div class="flex">
-                    <x-jet-input id="initials-mr" class="mt-1" type="radio" name="initials-mr" :value="old('initials')" />
-                    <x-jet-input id="initials-mrs" class="mt-1" type="radio" name="initials-mrs" :value="old('initials')" />
-                </div>
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())

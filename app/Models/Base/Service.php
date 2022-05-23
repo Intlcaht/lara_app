@@ -12,6 +12,7 @@ use App\Models\BusinessProfileService;
 use App\Models\Commission;
 use App\Models\FAQ;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\ServiceCategoryServiceJoint;
 use App\Models\ServicePackage;
 use App\Models\ServiceRequirement;
@@ -42,6 +43,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Collection|Commission[] $commissions
  * @property Collection|FAQ[] $f_a_q_s
  * @property Collection|Order[] $orders
+ * @property Collection|Payment[] $payments
  * @property Collection|ServiceCategoryServiceJoint[] $service_category_service_joints
  * @property Collection|ServicePackage[] $service_packages
  * @property Collection|ServiceRequirement[] $service_requirements
@@ -97,6 +99,11 @@ class Service extends BaseModel
 	public function orders(): HasMany
 	{
 		return $this->hasMany(Order::class, Order::SERVICE_U_ID, Order::U_ID);
+	}
+
+	public function payments(): HasMany
+	{
+		return $this->hasMany(Payment::class, Payment::SERVICE_U_ID, Payment::U_ID);
 	}
 
 	public function service_category_service_joints(): HasMany

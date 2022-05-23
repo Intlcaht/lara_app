@@ -7,7 +7,6 @@
 namespace App\Models\Base;
 
 use App\Models\BaseModel;
-use App\Models\CashOut;
 use App\Models\CheckinUser;
 use App\Models\Order;
 use App\Traits\FormatDates;
@@ -27,11 +26,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property float $amount
  * @property string $status
  * @property string $description
- * @property string|null $cash_out_u_id
  * @property string|null $order_u_id
  * 
  * @property CheckinUser|null $checkin_user
- * @property CashOut|null $cash_out
  * @property Order|null $order
  *
  * @package App\Models\Base
@@ -49,7 +46,6 @@ class Earning extends BaseModel
 	const AMOUNT = 'amount';
 	const STATUS = 'status';
 	const DESCRIPTION = 'description';
-	const CASH_OUT_U_ID = 'cash_out_u_id';
 	const ORDER_U_ID = 'order_u_id';
 	protected $connection = 'mysql';
 	protected $table = 'earnings';
@@ -67,11 +63,6 @@ class Earning extends BaseModel
 	public function checkin_user(): BelongsTo
 	{
 		return $this->belongsTo(CheckinUser::class, \App\Models\Earning::CHECKIN_USER_U_ID, CheckinUser::U_ID);
-	}
-
-	public function cash_out(): BelongsTo
-	{
-		return $this->belongsTo(CashOut::class, \App\Models\Earning::CASH_OUT_U_ID, CashOut::U_ID);
 	}
 
 	public function order(): BelongsTo

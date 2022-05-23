@@ -23,10 +23,13 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Prettus\Repository\Contracts\Transformable;
+use Prettus\Repository\Traits\TransformableTrait;
 
 /**
  * Class User
- * 
+ *
  * @property int $id
  * @property string $u_id
  * @property string $name
@@ -45,7 +48,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $status
  * @property string|null $otp
  * @property string $user_profile_u_id
- * 
+ *
  * @property UserProfile $user_profile
  * @property Collection|BlogComment[] $blog_comments
  * @property Collection|Chat[] $chats_where_receiver
@@ -60,9 +63,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  *
  * @package App\Models\Base
  */
-class User extends BaseModel
+class User extends Authenticatable implements Transformable
 {
 	use FormatDates;
+    use TransformableTrait;
 	const ID = 'id';
 	const U_ID = 'u_id';
 	const NAME = 'name';

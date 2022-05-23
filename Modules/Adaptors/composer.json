@@ -1,5 +1,6 @@
 {
     "name": "nwidart/adaptors",
+    "type": "laravel-module",
     "description": "",
     "authors": [
         {

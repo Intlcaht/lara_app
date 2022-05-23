@@ -9,6 +9,7 @@ namespace App\Models\Base;
 use App\Models\BaseModel;
 use App\Models\BusinessProfile;
 use App\Models\BusinessProfileAdapterTransaction;
+use App\Models\Payment;
 use App\Traits\FormatDates;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
@@ -34,6 +35,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * 
  * @property BusinessProfile $profile
  * @property Collection|BusinessProfileAdapterTransaction[] $business_profile_adapter_transactions
+ * @property Collection|Payment[] $payments
  *
  * @package App\Models\Base
  */
@@ -79,5 +81,10 @@ class BusinessProfileAdapter extends BaseModel
 	public function business_profile_adapter_transactions(): HasMany
 	{
 		return $this->hasMany(BusinessProfileAdapterTransaction::class, BusinessProfileAdapterTransaction::BUSINESS_PROFILE_ADAPTER_U_ID, BusinessProfileAdapterTransaction::U_ID);
+	}
+
+	public function payments(): HasMany
+	{
+		return $this->hasMany(Payment::class, Payment::BUSINESS_PROFILE_ADAPTER_U_ID, Payment::U_ID);
 	}
 }
