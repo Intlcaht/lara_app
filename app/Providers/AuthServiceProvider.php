@@ -15,6 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         //Team::class => TeamPolicy::class,
+        'Spatie\Permission\Models\Role' => 'App\Policies\RolePolicy',
     ];
 
     /**

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Libraries\AuthService;
+use App\Services\Auth\AuthService as AuthAuthService;
 use Illuminate\Support\ServiceProvider;
 use Tenancy\Identification\Contracts\ResolvesTenants;
 
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
 
         //     return $resolver;
         // });
+        $this->app->register(RepositoryServiceProvider::class);
     }
 
     /**
@@ -30,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $this->app->bind(AuthService::class, AuthAuthService::class);
     }
 }

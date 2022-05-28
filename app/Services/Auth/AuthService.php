@@ -7,6 +7,7 @@ use App\Models\Registration;
 use App\Models\User;
 use App\Repositories\Auth\RegistrationRepository;
 use App\Repositories\Auth\UserRepository;
+use App\Utils\HttpCode;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService implements BaseAuthService
@@ -21,8 +22,16 @@ class AuthService implements BaseAuthService
     }
     public function register(Registration $registration): ?Registration
     {
-        $res = $this->registrationRepository->firstOrCreate([$registration]);
-        return $res;
+        $res = Registration::where([
+            Registration::EMAIL => $registration->email,
+            Registration::PASSWORD => $registration->password
+        ])->first();
+        if(isset($res)) {
+           return null;
+        }
+        $registration->u_id = uniqid('REG');
+        $registration->save();
+        return $registration;
     }
 
     public function loginBasic($username, $password): ?User

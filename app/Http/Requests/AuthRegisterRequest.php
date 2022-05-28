@@ -14,12 +14,19 @@ class AuthRegisterRequest extends FormRequest implements RequestInfo
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     public function body(): Registration
     {
+        $request = $this->request->all();
         $reg =  new Registration();
+        $reg->email = $request['email'];
+        $reg->phone_number = $request['phone_number'];
+        $reg->first_name = $request['first_name'];
+        $reg->last_name = $request['last_name'];
+        $reg->password = $request['password'];
+
         return $reg;
     }
 

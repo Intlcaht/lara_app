@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRegisterRequest;
 use App\Libraries\AuthService;
+use App\Utils\HttpCode;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -16,6 +17,8 @@ class AuthController extends Controller
     public function register(AuthRegisterRequest $authRegisterRequest)
     {
         $registration = $this->authService->register($authRegisterRequest->body());
+        if(isset($registration))
         return fractal($registration);
+        else return response('Credentials already registered', HttpCode::FOUND);
     }
 }

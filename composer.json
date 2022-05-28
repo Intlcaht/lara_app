@@ -9,7 +9,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "bezhansalleh/filament-shield": "^1.1",
         "binarytorch/larecipe": "^2.5",
+        "filament/filament": "*",
+        "filament/tables": "^2.12",
         "guzzlehttp/guzzle": "^7.2",
         "joshbrw/laravel-module-installer": "^2.0",
         "laravel/framework": "^9.11",
@@ -23,8 +26,12 @@
         "nwidart/laravel-modules": "^9.0",
         "power-components/livewire-powergrid": "^2.4",
         "prettus/l5-repository": "^2.8",
+        "ryangjchandler/filament-navigation": "^0.2.3",
         "spatie/laravel-fractal": "^6.0",
-        "spatie/laravel-query-builder": "^5.0"
+        "spatie/laravel-permission": "^5.5",
+        "spatie/laravel-query-builder": "^5.0",
+        "yepsua/filament-captcha-field": "^0.1.0",
+        "yepsua/filament-themes": "^0.1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -62,7 +69,8 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan filament:upgrade"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
