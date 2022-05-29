@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Libraries\AuthService;
+use App\Libraries\Auth\AuthService;
 use App\Services\Auth\AuthService as AuthAuthService;
 use Illuminate\Support\ServiceProvider;
 use Tenancy\Identification\Contracts\ResolvesTenants;

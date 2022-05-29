@@ -14,6 +14,7 @@
         "filament/filament": "*",
         "filament/tables": "^2.12",
         "guzzlehttp/guzzle": "^7.2",
+        "jeffgreco13/filament-breezy": "^1.3",
         "joshbrw/laravel-module-installer": "^2.0",
         "laravel/framework": "^9.11",
         "laravel/jetstream": "^2.8",
@@ -26,7 +27,6 @@
         "nwidart/laravel-modules": "^9.0",
         "power-components/livewire-powergrid": "^2.4",
         "prettus/l5-repository": "^2.8",
-        "ryangjchandler/filament-navigation": "^0.2.3",
         "spatie/laravel-fractal": "^6.0",
         "spatie/laravel-permission": "^5.5",
         "spatie/laravel-query-builder": "^5.0",
@@ -70,7 +70,9 @@
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
-            "@php artisan filament:upgrade"
+            "@php artisan filament:upgrade",
+            "@php artisan config:clear",
+            "@php artisan view:clear"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""

@@ -1,3 +1,4 @@
-<div>
-    <!-- Knowing is not enough; we must apply. Being willing is not enough; we must do. - Leonardo da Vinci -->
-</div>
+<footer class="bg-blue-500 py-3 px-3 w-full min-h-min" >
+    <p>some text here</p>
+    {{ $message }}
+</footer>

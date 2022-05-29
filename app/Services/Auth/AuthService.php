@@ -2,12 +2,12 @@
 
 namespace App\Services\Auth;
 
-use App\Libraries\AuthService as BaseAuthService;
+use App\Exceptions\Auth\CredentialsAlreadyRegistered;
+use App\Libraries\Auth\AuthService as BaseAuthService;
 use App\Models\Registration;
 use App\Models\User;
 use App\Repositories\Auth\RegistrationRepository;
 use App\Repositories\Auth\UserRepository;
-use App\Utils\HttpCode;
 use Illuminate\Support\Facades\Auth;
 
 class AuthService implements BaseAuthService
@@ -20,6 +20,13 @@ class AuthService implements BaseAuthService
         $this->registrationRepository = $registrationRepository;
         $this->userRepository = $userRepository;
     }
+    /**
+     * Undocumented function
+     *
+     * @param Registration $registration
+     * @return Registration|null
+     * @throws CredentialsAlreadyRegistered
+     */
     public function register(Registration $registration): ?Registration
     {
         $res = Registration::where([
@@ -27,7 +34,7 @@ class AuthService implements BaseAuthService
             Registration::PASSWORD => $registration->password
         ])->first();
         if(isset($res)) {
-           return null;
+           throw new CredentialsAlreadyRegistered();
         }
         $registration->u_id = uniqid('REG');
         $registration->save();

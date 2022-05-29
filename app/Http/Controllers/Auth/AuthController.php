@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRegisterRequest;
-use App\Libraries\AuthService;
+use App\Libraries\Auth\AuthService;
 use App\Utils\HttpCode;
 use Illuminate\Http\Request;
 
