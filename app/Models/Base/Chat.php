@@ -6,14 +6,13 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\CheckIn;
+use App\Models\OrderStatusProvider;
 use App\Models\User;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -22,6 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property string $u_id
  * @property string|null $check_in_u_id
+ * @property string|null $order_status_provider_u_id
  * @property string|null $message
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -30,14 +30,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $receiver_u_id
  * @property string|null $attachment_url
  * @property string $attachment_type
- * @property string|null $parent_chat_u_id
  * @property string $delivery_status
  * 
  * @property CheckIn|null $check_in
+ * @property OrderStatusProvider|null $order_status_provider
  * @property User|null $receiver
  * @property User $sender
- * @property \App\Models\Chat|null $parent_chat
- * @property Collection|\App\Models\Chat[] $chats_where_parent_chat
  *
  * @package App\Models\Base
  */
@@ -48,6 +46,7 @@ class Chat extends BaseModel
 	const ID = 'id';
 	const U_ID = 'u_id';
 	const CHECK_IN_U_ID = 'check_in_u_id';
+	const ORDER_STATUS_PROVIDER_U_ID = 'order_status_provider_u_id';
 	const MESSAGE = 'message';
 	const CREATED_AT = 'created_at';
 	const UPDATED_AT = 'updated_at';
@@ -56,7 +55,6 @@ class Chat extends BaseModel
 	const RECEIVER_U_ID = 'receiver_u_id';
 	const ATTACHMENT_URL = 'attachment_url';
 	const ATTACHMENT_TYPE = 'attachment_type';
-	const PARENT_CHAT_U_ID = 'parent_chat_u_id';
 	const DELIVERY_STATUS = 'delivery_status';
 	protected $connection = 'mysql';
 	protected $table = 'chats';
@@ -75,6 +73,11 @@ class Chat extends BaseModel
 		return $this->belongsTo(CheckIn::class, \App\Models\Chat::CHECK_IN_U_ID, CheckIn::U_ID);
 	}
 
+	public function order_status_provider(): BelongsTo
+	{
+		return $this->belongsTo(OrderStatusProvider::class, \App\Models\Chat::ORDER_STATUS_PROVIDER_U_ID, OrderStatusProvider::U_ID);
+	}
+
 	public function receiver(): BelongsTo
 	{
 		return $this->belongsTo(User::class, \App\Models\Chat::RECEIVER_U_ID, User::U_ID);
@@ -83,15 +86,5 @@ class Chat extends BaseModel
 	public function sender(): BelongsTo
 	{
 		return $this->belongsTo(User::class, \App\Models\Chat::SENDER_U_ID, User::U_ID);
-	}
-
-	public function parent_chat(): BelongsTo
-	{
-		return $this->belongsTo(\App\Models\Chat::class, \App\Models\Chat::PARENT_CHAT_U_ID, \App\Models\Chat::U_ID);
-	}
-
-	public function chats_where_parent_chat(): HasMany
-	{
-		return $this->hasMany(\App\Models\Chat::class, \App\Models\Chat::PARENT_CHAT_U_ID, \App\Models\Chat::U_ID);
 	}
 }

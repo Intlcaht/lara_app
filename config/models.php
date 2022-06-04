@@ -52,7 +52,7 @@ return [
         |
         */
 
-        'parent' => App\Models\BaseModel::class,
+        'parent' => App\Utils\BaseModel::class,
 
         /*
         |--------------------------------------------------------------------------
@@ -285,9 +285,9 @@ return [
             'team_user',
             'team_invitations',
             'teams',
+            'migrations',
             'sessions',
             'personal_access_tokens',
-            'users'
         ],
 
         /*

@@ -58,7 +58,7 @@ return [
             ],
             'modal' => [
                 'actions' => [
-                    'alignment' => 'left',
+                    'alignment' => 'right',
                 ],
             ],
         ],

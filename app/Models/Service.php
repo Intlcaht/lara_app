@@ -11,6 +11,8 @@ class Service extends BaseService
 		self::USER_U_ID,
 		self::TITLE,
 		self::DESCRIPTION,
-		self::EXPECTED_DELIVERY
+		self::EXPECTED_DELIVERY,
+		self::LOCATION_LAT,
+		self::LOCATION_LONG
 	];
 }

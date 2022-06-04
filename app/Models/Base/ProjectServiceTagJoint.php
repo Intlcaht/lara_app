@@ -6,10 +6,10 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\Project;
 use App\Models\ServiceTag;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;

@@ -213,10 +213,10 @@ return [
     */
 
     'composer' => [
-        'vendor' => 'nwidart',
+        'vendor' => 'Vincent',
         'author' => [
-            'name' => 'Nicolas Widart',
-            'email' => 'n.widart@gmail.com',
+            'name' => 'Peter Vincent',
+            'email' => 'info@intlcaht.com',
         ],
         'composer-output' => false,
     ],

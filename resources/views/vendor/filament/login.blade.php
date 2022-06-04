@@ -9,6 +9,7 @@
         ])>
             <div class="flex justify-center w-full">
                 <x-filament::brand />
+
             </div>
 
             <h2 class="text-2xl font-bold tracking-tight text-center">

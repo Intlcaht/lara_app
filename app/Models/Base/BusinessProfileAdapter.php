@@ -6,11 +6,11 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\BusinessProfile;
 use App\Models\BusinessProfileAdapterTransaction;
 use App\Models\Payment;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -23,15 +23,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string $u_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property string $adapter_u_id
+ * @property bool $active
  * @property string $profile_u_id
- * @property float|null $min_amount
- * @property float|null $max_amount
- * @property float|null $max_percentage
- * @property float|null $min_percentage
- * @property float|null $percentage
+ * @property float|null $loss
+ * @property float|null $profit
+ * @property float|null $max_payment
+ * @property float|null $min_payment
  * @property float $balance
- * @property string $type
  * 
  * @property BusinessProfile $profile
  * @property Collection|BusinessProfileAdapterTransaction[] $business_profile_adapter_transactions
@@ -46,25 +44,23 @@ class BusinessProfileAdapter extends BaseModel
 	const U_ID = 'u_id';
 	const CREATED_AT = 'created_at';
 	const UPDATED_AT = 'updated_at';
-	const ADAPTER_U_ID = 'adapter_u_id';
+	const ACTIVE = 'active';
 	const PROFILE_U_ID = 'profile_u_id';
-	const MIN_AMOUNT = 'min_amount';
-	const MAX_AMOUNT = 'max_amount';
-	const MAX_PERCENTAGE = 'max_percentage';
-	const MIN_PERCENTAGE = 'min_percentage';
-	const PERCENTAGE = 'percentage';
+	const LOSS = 'loss';
+	const PROFIT = 'profit';
+	const MAX_PAYMENT = 'max_payment';
+	const MIN_PAYMENT = 'min_payment';
 	const BALANCE = 'balance';
-	const TYPE = 'type';
 	protected $connection = 'mysql';
 	protected $table = 'business_profile_adapter';
 
 	protected $casts = [
 		self::ID => 'int',
-		self::MIN_AMOUNT => 'float',
-		self::MAX_AMOUNT => 'float',
-		self::MAX_PERCENTAGE => 'float',
-		self::MIN_PERCENTAGE => 'float',
-		self::PERCENTAGE => 'float',
+		self::ACTIVE => 'bool',
+		self::LOSS => 'float',
+		self::PROFIT => 'float',
+		self::MAX_PAYMENT => 'float',
+		self::MIN_PAYMENT => 'float',
 		self::BALANCE => 'float'
 	];
 

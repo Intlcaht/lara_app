@@ -6,10 +6,10 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**

@@ -12,7 +12,6 @@ class Earning extends BaseEarning
 		self::AMOUNT,
 		self::STATUS,
 		self::DESCRIPTION,
-		self::CASH_OUT_U_ID,
 		self::ORDER_U_ID
 	];
 }

@@ -8,14 +8,12 @@ class BusinessProfileAdapter extends BaseBusinessProfileAdapter
 {
 	protected $fillable = [
 		self::U_ID,
-		self::ADAPTER_U_ID,
+		self::ACTIVE,
 		self::PROFILE_U_ID,
-		self::MIN_AMOUNT,
-		self::MAX_AMOUNT,
-		self::MAX_PERCENTAGE,
-		self::MIN_PERCENTAGE,
-		self::PERCENTAGE,
-		self::BALANCE,
-		self::TYPE
+		self::LOSS,
+		self::PROFIT,
+		self::MAX_PAYMENT,
+		self::MIN_PAYMENT,
+		self::BALANCE
 	];
 }

@@ -4,23 +4,19 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\Base\User as Authenticatable;
-use Carbon\Carbon;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-//use Laravel\Fortify\TwoFactorAuthenticatable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use Spatie\Permission\Traits\HasRoles;
-use JeffGreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
 
-class User extends Authenticatable implements MustVerifyEmail
+class User extends Authenticatable
 {
     use HasApiTokens;
     use HasFactory;
     use HasProfilePhoto;
     use Notifiable;
     use TwoFactorAuthenticatable;
-    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -62,24 +58,4 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
-
-    public function hasVerifiedEmail()
-    {
-        return $this->email_verified_at != null;
-    }
-
-    public function markEmailAsVerified()
-    {
-        $this->email_verified_at = Carbon::now();
-        $this->save();
-    }
-
-    public function sendEmailVerificationNotification()
-    {
-    }
-
-    public function getEmailForVerification()
-    {
-        return $this->email;
-    }
 }

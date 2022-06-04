@@ -10,11 +10,9 @@ class Order extends BaseOrder
 		self::U_ID,
 		self::SERVICE_U_ID,
 		self::PROJECT_U_ID,
-		self::STATUS,
-		self::BID,
-		self::BID_TYPE,
 		self::BUSINESS_PROFILE_U_ID,
 		self::DESCRIPTION,
-		self::SERVICE_TAGS_BUSINESS_PROFILE_JOINT_DURATION_U_ID
+		self::SERVICE_TAGS_BUSINESS_PROFILE_JOINT_DURATION_U_ID,
+		self::SERVICE_NOTIFICATION_U_ID
 	];
 }

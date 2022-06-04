@@ -14,7 +14,6 @@ class Commission extends BaseCommission
 		self::TYPE,
 		self::VALUE,
 		self::FUNCTION_TYPE,
-		self::SERVICE_U_ID,
-		self::PAYMENTSID
+		self::SERVICE_U_ID
 	];
 }

@@ -6,14 +6,15 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\CheckIn;
 use App\Models\CheckinUser;
+use App\Models\OrderStatusProvider;
 use App\Models\Project;
 use App\Models\ProjectDataType;
 use App\Models\ProjectStatusLabel;
 use App\Models\ProjectTaskGroup;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -39,12 +40,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon|null $timeline_end
  * @property string $status_label
  * @property int $project_status_labelsId
- * @property string $user_u_id
- * @property string $user_type
- * @property string $user_status
  * @property Carbon|null $estimated_time_start
  * @property Carbon|null $estimated_time_end
  * @property bool $completed
+ * @property string|null $order_status_users_u_id
  * 
  * @property CheckIn|null $check_in
  * @property CheckinUser|null $check_out
@@ -52,6 +51,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Project|null $project
  * @property ProjectTask|null $project_task
  * @property ProjectStatusLabel $project_status_labels_id
+ * @property OrderStatusProvider|null $order_status_users
  * @property Collection|ProjectDataType[] $project_data_types_where_project_tasks_id
  * @property Collection|ProjectTask[] $project_tasks
  *
@@ -77,12 +77,10 @@ class ProjectTask extends BaseModel
 	const TIMELINE_END = 'timeline_end';
 	const STATUS_LABEL = 'status_label';
 	const PROJECT_STATUS_LABELS_ID = 'project_status_labelsId';
-	const USER_U_ID = 'user_u_id';
-	const USER_TYPE = 'user_type';
-	const USER_STATUS = 'user_status';
 	const ESTIMATED_TIME_START = 'estimated_time_start';
 	const ESTIMATED_TIME_END = 'estimated_time_end';
 	const COMPLETED = 'completed';
+	const ORDER_STATUS_USERS_U_ID = 'order_status_users_u_id';
 	protected $connection = 'mysql';
 	protected $table = 'project_tasks';
 
@@ -129,6 +127,11 @@ class ProjectTask extends BaseModel
 	public function project_status_labels_id(): BelongsTo
 	{
 		return $this->belongsTo(ProjectStatusLabel::class, ProjectTask::PROJECT_STATUS_LABELSID);
+	}
+
+	public function order_status_users(): BelongsTo
+	{
+		return $this->belongsTo(OrderStatusProvider::class, ProjectTask::ORDER_STATUS_USERS_U_ID, OrderStatusProvider::U_ID);
 	}
 
 	public function project_data_types_where_project_tasks_id(): HasMany

@@ -17,6 +17,8 @@ class Project extends BaseProject
 		self::STATUS,
 		self::DURATION,
 		self::DURATION_TYPE,
-		self::LOCATIONSID
+		self::LOCATION_LAT,
+		self::LOCATION_LONG,
+		self::EXPECTED_SERVICE_RADIUS
 	];
 }

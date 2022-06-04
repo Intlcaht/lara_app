@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'home_url' => '/',
+    'home_url' => '/admin',
 
     /*
     |--------------------------------------------------------------------------
@@ -142,8 +142,8 @@ return [
         'namespace' => 'App\\Filament\\Widgets',
         'path' => app_path('Filament/Widgets'),
         'register' => [
-            Widgets\AccountWidget::class,
-            Widgets\FilamentInfoWidget::class,
+            // Widgets\AccountWidget::class,
+            // Widgets\FilamentInfoWidget::class,
         ],
     ],
 
@@ -196,13 +196,13 @@ return [
         'footer' => [
             'should_show_logo' => false,
         ],
-        'max_content_width' => null,
+        'max_content_width' => 'full',
         'notifications' => [
             'vertical_alignment' => 'top',
             'alignment' => 'center',
         ],
         'sidebar' => [
-            'is_collapsible_on_desktop' => false,
+            'is_collapsible_on_desktop' => true,
         ],
         'tables' => [
             'actions' => [
@@ -220,7 +220,9 @@ return [
     |
     */
 
-    'favicon' => null,
+    'favicon' =>
+        // asset('manifest/favicon.ico'),
+        null,
 
     /*
     |--------------------------------------------------------------------------

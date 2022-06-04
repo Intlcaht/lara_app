@@ -10,11 +10,11 @@ class UserProfile extends BaseUserProfile
 		self::U_ID,
 		self::FIRST_NAME,
 		self::LAST_NAME,
+		self::PROFILE_PHOTO_PATH,
 		self::NATIONAL_ID,
 		self::ADDRESS,
 		self::COUNTY,
 		self::PHOTO_URL,
-		self::MIDDLE_NAME,
 		self::INITIALS
 	];
 }

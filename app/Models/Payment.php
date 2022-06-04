@@ -10,9 +10,10 @@ class Payment extends BasePayment
 		self::U_ID,
 		self::CHECKIN_USER_U_ID,
 		self::AMOUNT,
-		self::PAYMENT_ID,
 		self::DESCRIPTION,
-		self::TRANSACTION_U_ID,
-		self::ORDER_U_ID
+		self::ORDER_U_ID,
+		self::BUSINESS_PROFILE_ADAPTER_U_ID,
+		self::SERVICE_U_ID,
+		self::ESCROW_TRANSACTION_U_ID
 	];
 }

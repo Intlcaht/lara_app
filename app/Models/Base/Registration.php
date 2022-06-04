@@ -6,8 +6,8 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 
 /**
@@ -24,7 +24,6 @@ use Carbon\Carbon;
  * @property string $phone_number
  * @property string $first_name
  * @property string $last_name
- * @property string $middle_name
  * @property string $initials
  *
  * @package App\Models\Base
@@ -43,7 +42,6 @@ class Registration extends BaseModel
 	const PHONE_NUMBER = 'phone_number';
 	const FIRST_NAME = 'first_name';
 	const LAST_NAME = 'last_name';
-	const MIDDLE_NAME = 'middle_name';
 	const INITIALS = 'initials';
 	protected $connection = 'mysql';
 	protected $table = 'registrations';

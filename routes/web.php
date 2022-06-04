@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use Illuminate\Http\JsonResponse;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,27 +16,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
-
-//Route::view('/register', 'auth.register')->name('register');
-
-//Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
-        return view('dashboard');
+        return Inertia::render('Dashboard');
     })->name('dashboard');
 });
-
-// Route::get('/__clockwork/{request:.+}', function ($request) {
-//     $clockwork = Clockwork::init();
-//     return new JsonResponse($clockwork->getMetadata($request));
-// });
-
-Route::view('/powergrid', 'powergrid-demo');
-

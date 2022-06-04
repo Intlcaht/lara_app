@@ -19,7 +19,6 @@ class Registration extends BaseRegistration
 		self::PHONE_NUMBER,
 		self::FIRST_NAME,
 		self::LAST_NAME,
-		self::MIDDLE_NAME,
 		self::INITIALS
 	];
 }

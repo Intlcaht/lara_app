@@ -10,7 +10,7 @@ class Login extends BaseLoginPage
     protected function getFormSchema(): array
     {
         $formSchema = parent::getFormSchema();
-        $formSchema[] = Captcha::make('captcha');
+        // $formSchema[] = Captcha::make('captcha');
 
         return $formSchema;
     }

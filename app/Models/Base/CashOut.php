@@ -6,10 +6,10 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\Escrow;
 use App\Models\EscrowTransaction;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -21,11 +21,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property float $amount
+ * @property string $escrow_u_id
  * @property Carbon|null $period_bound_upper
  * @property Carbon|null $period_bound_lower
- * @property float|null $cap_percentage
- * @property string $escrow_u_id
  * @property float|null $balance
+ * @property float|null $cap_percentage
  * @property string $escrow_transaction_u_id
  * 
  * @property Escrow $escrow
@@ -41,11 +41,11 @@ class CashOut extends BaseModel
 	const CREATED_AT = 'created_at';
 	const UPDATED_AT = 'updated_at';
 	const AMOUNT = 'amount';
+	const ESCROW_U_ID = 'escrow_u_id';
 	const PERIOD_BOUND_UPPER = 'period_bound_upper';
 	const PERIOD_BOUND_LOWER = 'period_bound_lower';
-	const CAP_PERCENTAGE = 'cap_percentage';
-	const ESCROW_U_ID = 'escrow_u_id';
 	const BALANCE = 'balance';
+	const CAP_PERCENTAGE = 'cap_percentage';
 	const ESCROW_TRANSACTION_U_ID = 'escrow_transaction_u_id';
 	protected $connection = 'mysql';
 	protected $table = 'cash_out';
@@ -53,8 +53,8 @@ class CashOut extends BaseModel
 	protected $casts = [
 		self::ID => 'int',
 		self::AMOUNT => 'float',
-		self::CAP_PERCENTAGE => 'float',
-		self::BALANCE => 'float'
+		self::BALANCE => 'float',
+		self::CAP_PERCENTAGE => 'float'
 	];
 
 	protected $dates = [

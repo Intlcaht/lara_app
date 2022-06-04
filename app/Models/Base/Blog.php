@@ -6,12 +6,12 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\BlogComment;
 use App\Models\BusinessProfile;
 use App\Models\ServiceTag;
 use App\Models\ServiceTagsBlogsJoint;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Blog
- * 
+ *
  * @property int $id
  * @property string $u_id
  * @property Carbon|null $created_at
@@ -32,7 +32,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $slug
  * @property string $article
  * @property float $estimated_read_time
- * 
+ *
  * @property BusinessProfile|null $business_profile
  * @property Collection|BlogComment[] $blog_comments
  * @property Collection|ServiceTag[] $service_tags
@@ -78,7 +78,7 @@ class Blog extends BaseModel
 
 	public function service_tags(): BelongsToMany
 	{
-		return $this->belongsToMany(ServiceTag::class, 'service_tags_blogs_joint', ServiceTag::BLOG_U_ID, ServiceTag::SERVICE_TAG_U_ID)
+		return $this->belongsToMany(ServiceTag::class, 'service_tags_blogs_joint', ServiceTagsBlogsJoint::BLOG_U_ID, ServiceTagsBlogsJoint::SERVICE_TAG_U_ID)
 					->withPivot(ServiceTagsBlogsJoint::ID, ServiceTagsBlogsJoint::DELETED_AT)
 					->withTimestamps();
 	}

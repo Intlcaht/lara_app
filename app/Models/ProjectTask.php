@@ -19,11 +19,9 @@ class ProjectTask extends BaseProjectTask
 		self::TIMELINE_END,
 		self::STATUS_LABEL,
 		self::PROJECT_STATUS_LABELSID,
-		self::USER_U_ID,
-		self::USER_TYPE,
-		self::USER_STATUS,
 		self::ESTIMATED_TIME_START,
 		self::ESTIMATED_TIME_END,
-		self::COMPLETED
+		self::COMPLETED,
+		self::ORDER_STATUS_USERS_U_ID
 	];
 }

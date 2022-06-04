@@ -18,8 +18,8 @@ class AuthController extends Controller
     public function register(AuthRegisterRequest $authRegisterRequest)
     {
         $registration = $this->authService->register($authRegisterRequest->body());
-        if(isset($registration))
-        return fractal($registration);
+        if (isset($registration))
+            return fractal($registration);
         else return response('Credentials already registered', HttpCode::FOUND);
     }
 }

@@ -6,19 +6,20 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\Blog;
 use App\Models\BusinessAttachment;
 use App\Models\BusinessProfileAdapter;
 use App\Models\BusinessProfileService;
 use App\Models\Escrow;
 use App\Models\Order;
+use App\Models\OrderStatusBusinessProfile;
 use App\Models\Service;
 use App\Models\ServiceTag;
 use App\Models\ServiceTagsBusinessProfileJoint;
 use App\Models\User;
 use App\Models\UserBusinessProfile;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -32,6 +33,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int $id
  * @property string $u_id
  * @property float|null $cap_percentage
+ * @property string|null $escrow_u_id
+ * @property string $service_notifier_user_u_id
  * @property bool $is_online
  * @property string $address
  * @property string $title
@@ -41,13 +44,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
  * @property string $terms_and_conditions
- * @property string|null $escrow_u_id
  *
  * @property Escrow|null $escrow
+ * @property UserBusinessProfile $service_notifier_user
  * @property Collection|Blog[] $blogs
  * @property Collection|BusinessAttachment[] $business_attachments
  * @property Collection|BusinessProfileAdapter[] $business_profile_adapters_where_profile
  * @property Collection|Service[] $services
+ * @property Collection|OrderStatusBusinessProfile[] $order_status_business_profiles_where_profile
  * @property Collection|Order[] $orders
  * @property Collection|ServiceTag[] $service_tags
  * @property Collection|User[] $users
@@ -61,6 +65,8 @@ class BusinessProfile extends BaseModel
 	const ID = 'id';
 	const U_ID = 'u_id';
 	const CAP_PERCENTAGE = 'cap_percentage';
+	const ESCROW_U_ID = 'escrow_u_id';
+	const SERVICE_NOTIFIER_USER_U_ID = 'service_notifier_user_u_id';
 	const IS_ONLINE = 'is_online';
 	const ADDRESS = 'address';
 	const TITLE = 'title';
@@ -70,8 +76,7 @@ class BusinessProfile extends BaseModel
 	const UPDATED_AT = 'updated_at';
 	const DELETED_AT = 'deleted_at';
 	const TERMS_AND_CONDITIONS = 'terms_and_conditions';
-	const ESCROW_U_ID = 'escrow_u_id';
-	//sprotected $connection = 'mysql';
+	protected $connection = 'mysql';
 	protected $table = 'business_profiles';
 
 	protected $casts = [
@@ -88,6 +93,11 @@ class BusinessProfile extends BaseModel
 	public function escrow(): BelongsTo
 	{
 		return $this->belongsTo(Escrow::class, \App\Models\BusinessProfile::ESCROW_U_ID, Escrow::U_ID);
+	}
+
+	public function service_notifier_user(): BelongsTo
+	{
+		return $this->belongsTo(UserBusinessProfile::class, \App\Models\BusinessProfile::SERVICE_NOTIFIER_USER_U_ID, UserBusinessProfile::U_ID);
 	}
 
 	public function blogs(): HasMany
@@ -107,9 +117,14 @@ class BusinessProfile extends BaseModel
 
 	public function services(): BelongsToMany
 	{
-		return $this->belongsToMany(Service::class, 'business_profile_service', Service::BUSINESS_PROFILESID, Service::SERVICESID)
+		return $this->belongsToMany(Service::class, 'business_profile_service', BusinessProfileService::BUSINESS_PROFILES_ID, BusinessProfileService::SERVICES_ID)
 					->withPivot(BusinessProfileService::ID, BusinessProfileService::U_ID, BusinessProfileService::DELETED_AT)
 					->withTimestamps();
+	}
+
+	public function order_status_business_profiles_where_profile(): HasMany
+	{
+		return $this->hasMany(OrderStatusBusinessProfile::class, OrderStatusBusinessProfile::PROFILE_U_ID, OrderStatusBusinessProfile::U_ID);
 	}
 
 	public function orders(): HasMany
@@ -119,14 +134,14 @@ class BusinessProfile extends BaseModel
 
 	public function service_tags(): BelongsToMany
 	{
-		return $this->belongsToMany(ServiceTag::class, 'service_tags_business_profile_joint', ServiceTag::PROFILE_U_ID, ServiceTag::TAG_U_ID)
+		return $this->belongsToMany(ServiceTag::class, 'service_tags_business_profile_joint', ServiceTagsBusinessProfileJoint::PROFILE_U_ID, ServiceTagsBusinessProfileJoint::TAG_U_ID)
 					->withPivot(ServiceTagsBusinessProfileJoint::ID, ServiceTagsBusinessProfileJoint::U_ID, ServiceTagsBusinessProfileJoint::DELETED_AT, ServiceTagsBusinessProfileJoint::RATE_AMOUNT, ServiceTagsBusinessProfileJoint::RATE_TYPE, ServiceTagsBusinessProfileJoint::PRIVACY_POLICY)
 					->withTimestamps();
 	}
 
 	public function users(): BelongsToMany
 	{
-		return $this->belongsToMany(User::class, 'user_business_profiles', User::PROFILE_U_ID, User::USER_U_ID)
+		return $this->belongsToMany(User::class, 'user_business_profiles', UserBusinessProfile::PROFILE_U_ID, UserBusinessProfile::USER_U_ID)
 					->withPivot(UserBusinessProfile::ID, UserBusinessProfile::U_ID, UserBusinessProfile::DELETED_AT)
 					->withTimestamps();
 	}

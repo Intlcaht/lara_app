@@ -6,11 +6,11 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\BusinessProfile;
 use App\Models\Service;
 use App\Models\ServiceReview;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

@@ -6,16 +6,16 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\CheckIn;
-use App\Models\Location;
 use App\Models\Order;
 use App\Models\ProjectProfile;
 use App\Models\ProjectServiceTagJoint;
 use App\Models\ProjectTask;
 use App\Models\ProjectsClient;
+use App\Models\ServiceNotification;
 use App\Models\ServiceTag;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -40,15 +40,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $status
  * @property int|null $duration
  * @property string|null $duration_type
- * @property int|null $locationsId
+ * @property float $location_lat
+ * @property float $location_long
+ * @property float $expected_service_radius
  * 
  * @property ProjectProfile $project_profile
- * @property Location|null $locations_id
  * @property Collection|CheckIn[] $check_ins
  * @property Collection|Order[] $orders
  * @property Collection|ServiceTag[] $service_tags
  * @property Collection|ProjectTask[] $project_tasks
  * @property Collection|ProjectsClient[] $projects_clients
+ * @property Collection|ServiceNotification[] $service_notifications
  *
  * @package App\Models\Base
  */
@@ -70,7 +72,9 @@ class Project extends BaseModel
 	const STATUS = 'status';
 	const DURATION = 'duration';
 	const DURATION_TYPE = 'duration_type';
-	const LOCATIONS_ID = 'locationsId';
+	const LOCATION_LAT = 'location_lat';
+	const LOCATION_LONG = 'location_long';
+	const EXPECTED_SERVICE_RADIUS = 'expected_service_radius';
 	protected $connection = 'mysql';
 	protected $table = 'projects';
 
@@ -78,7 +82,9 @@ class Project extends BaseModel
 		self::ID => 'int',
 		self::BUDGET => 'float',
 		self::DURATION => 'int',
-		self::LOCATIONSID => 'int'
+		self::LOCATION_LAT => 'float',
+		self::LOCATION_LONG => 'float',
+		self::EXPECTED_SERVICE_RADIUS => 'float'
 	];
 
 	protected $dates = [
@@ -89,11 +95,6 @@ class Project extends BaseModel
 	public function project_profile(): BelongsTo
 	{
 		return $this->belongsTo(ProjectProfile::class, \App\Models\Project::PROJECT_PROFILE_U_ID, ProjectProfile::U_ID);
-	}
-
-	public function locations_id(): BelongsTo
-	{
-		return $this->belongsTo(Location::class, \App\Models\Project::LOCATIONSID);
 	}
 
 	public function check_ins(): HasMany
@@ -121,5 +122,10 @@ class Project extends BaseModel
 	public function projects_clients(): HasMany
 	{
 		return $this->hasMany(ProjectsClient::class, ProjectsClient::PROJECT_U_ID, ProjectsClient::U_ID);
+	}
+
+	public function service_notifications(): HasMany
+	{
+		return $this->hasMany(ServiceNotification::class, ServiceNotification::PROJECT_U_ID, ServiceNotification::U_ID);
 	}
 }

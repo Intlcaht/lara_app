@@ -6,12 +6,14 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\BusinessProfile;
 use App\Models\User;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -27,6 +29,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * 
  * @property User $user
  * @property BusinessProfile $profile
+ * @property Collection|BusinessProfile[] $business_profiles_where_service_notifier_user
  *
  * @package App\Models\Base
  */
@@ -61,5 +64,10 @@ class UserBusinessProfile extends BaseModel
 	public function profile(): BelongsTo
 	{
 		return $this->belongsTo(BusinessProfile::class, UserBusinessProfile::PROFILE_U_ID, BusinessProfile::U_ID);
+	}
+
+	public function business_profiles_where_service_notifier_user(): HasMany
+	{
+		return $this->hasMany(BusinessProfile::class, BusinessProfile::SERVICE_NOTIFIER_USER_U_ID, BusinessProfile::U_ID);
 	}
 }

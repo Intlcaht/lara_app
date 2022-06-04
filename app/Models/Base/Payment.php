@@ -6,15 +6,19 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\BusinessProfileAdapter;
 use App\Models\CheckinUser;
 use App\Models\EscrowTransaction;
 use App\Models\Order;
+use App\Models\OrderStatusProvider;
+use App\Models\OrderStatusProviderPayment;
 use App\Models\Service;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -38,6 +42,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property BusinessProfileAdapter $business_profile_adapter
  * @property Service $service
  * @property EscrowTransaction|null $escrow_transaction
+ * @property Collection|OrderStatusProvider[] $order_status_providers
  *
  * @package App\Models\Base
  */
@@ -93,5 +98,11 @@ class Payment extends BaseModel
 	public function escrow_transaction(): BelongsTo
 	{
 		return $this->belongsTo(EscrowTransaction::class, \App\Models\Payment::ESCROW_TRANSACTION_U_ID, EscrowTransaction::U_ID);
+	}
+
+	public function order_status_providers(): BelongsToMany
+	{
+		return $this->belongsToMany(OrderStatusProvider::class, 'order_status_provider_payments', OrderStatusProvider::PAYMENT_U_ID, OrderStatusProvider::ORDER_STATUS_PROVIDER_U_ID)
+					->withPivot(OrderStatusProviderPayment::ID);
 	}
 }

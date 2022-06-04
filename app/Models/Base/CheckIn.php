@@ -6,7 +6,6 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\Chat;
 use App\Models\CheckinUser;
 use App\Models\Project;
@@ -15,6 +14,7 @@ use App\Models\ProjectTaskGroup;
 use App\Models\ServiceTag;
 use App\Models\ServiceTagCheckIn;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

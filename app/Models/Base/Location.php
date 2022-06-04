@@ -6,12 +6,9 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
-use App\Models\Project;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
@@ -26,8 +23,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property float $latitude
  * @property float $longitude
  * @property string $u_id
- * 
- * @property Collection|Project[] $projects_where_locations_id
  *
  * @package App\Models\Base
  */
@@ -57,9 +52,4 @@ class Location extends BaseModel
 		self::CREATED_AT,
 		self::UPDATED_AT
 	];
-
-	public function projects_where_locations_id(): HasMany
-	{
-		return $this->hasMany(Project::class, Project::LOCATIONSID);
-	}
 }

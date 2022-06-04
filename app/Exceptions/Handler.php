@@ -46,5 +46,12 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+        $this->renderable(function (\Spatie\Permission\Exceptions\UnauthorizedException $e, $request) {
+            return fractal([
+                'responseMessage' => 'You do not have the required authorization.',
+                'permission'  => $e->getRequiredPermissions(),
+            ]);
+            //return response()->json(, 403);
+        });
     }
 }

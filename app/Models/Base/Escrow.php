@@ -6,12 +6,12 @@
 
 namespace App\Models\Base;
 
-use App\Models\BaseModel;
 use App\Models\BusinessProfile;
 use App\Models\CashOut;
 use App\Models\EscrowTransaction;
 use App\Models\PaymentDetail;
 use App\Traits\FormatDates;
+use App\Utils\BaseModel;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
