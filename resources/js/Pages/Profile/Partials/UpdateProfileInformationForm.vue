@@ -16,9 +16,10 @@ const props = defineProps({
 
 const form = useForm({
     _method: 'PUT',
-    name: props.user.name,
+    first_name: props.user.first_name,
+    last_name: props.user.last_name,
     email: props.user.email,
-    photo: null,
+    photo: props.user.photo_url,
 });
 
 const verificationLinkSent = ref(null);
@@ -101,7 +102,7 @@ const clearPhotoFileInput = () => {
 
                 <!-- Current Profile Photo -->
                 <div v-show="! photoPreview" class="mt-2">
-                    <img :src="user.profile_photo_url" :alt="user.name" class="rounded-full h-20 w-20 object-cover">
+                    <img :src="user.photo_url" :alt="user.last_name" class="rounded-full h-20 w-20 object-cover">
                 </div>
 
                 <!-- New Profile Photo Preview -->
@@ -128,17 +129,29 @@ const clearPhotoFileInput = () => {
                 <JetInputError :message="form.errors.photo" class="mt-2" />
             </div>
 
-            <!-- Name -->
+            <!-- First Name -->
             <div class="col-span-6 sm:col-span-4">
-                <JetLabel for="name" value="Name" />
+                <JetLabel for="first_name" value="First Name" />
                 <JetInput
-                    id="name"
-                    v-model="form.name"
+                    id="first_name"
+                    v-model="form.first_name"
                     type="text"
                     class="mt-1 block w-full"
-                    autocomplete="name"
+                    autocomplete="first_name"
                 />
-                <JetInputError :message="form.errors.name" class="mt-2" />
+                <JetInputError :message="form.errors.first_name" class="mt-2" />
+            </div>
+             <!-- First Name -->
+            <div class="col-span-6 sm:col-span-4">
+                <JetLabel for="last_name" value="Last Name" />
+                <JetInput
+                    id="last_name"
+                    v-model="form.last_name"
+                    type="text"
+                    class="mt-1 block w-full"
+                    autocomplete="last_name"
+                />
+                <JetInputError :message="form.errors.last_name" class="mt-2" />
             </div>
 
             <!-- Email -->

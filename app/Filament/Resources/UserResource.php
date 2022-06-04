@@ -29,7 +29,7 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                \App\Tables\Columns\User::make('user_profile')->label('ID'),
+               // \App\Tables\Columns\User::make()->label('ID'),
                 Tables\Columns\TextColumn::make(User::EMAIL),
                 Tables\Columns\TextColumn::make(User::STATUS),
                 Tables\Columns\TagsColumn::make('role_names')

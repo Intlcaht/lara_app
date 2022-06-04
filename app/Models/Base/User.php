@@ -12,19 +12,16 @@ use App\Models\Chat;
 use App\Models\CheckinUser;
 use App\Models\OrderStatusClient;
 use App\Models\ProjectsClient;
-use App\Models\Role;
+use App\Models\User as ModelsUser;
 use App\Models\UserBusinessProfile;
-use App\Models\UserProfile;
 use App\Models\UserReview;
-use App\Models\UserRole;
 use App\Models\UsersRating;
 use App\Traits\FormatDates;
+use Illuminate\Foundation\Auth\User as BaseModel;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class User
@@ -45,9 +42,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string|null $otp
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property string $user_profile_u_id
+ * @property string|null $first_name
+ * @property string|null $last_name
+ * @property string|null $national_id
+ * @property string|null $county
+ * @property string|null $photo_url
+ * @property string|null $initials
  *
- * @property UserProfile $user_profile
  * @property Collection|BlogComment[] $blog_comments
  * @property Collection|Chat[] $chats_where_receiver
  * @property Collection|Chat[] $chats_where_sender
@@ -56,13 +57,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property Collection|ProjectsClient[] $projects_clients
  * @property Collection|BusinessProfile[] $business_profiles
  * @property Collection|UserReview[] $user_reviews
- * @property Collection|Role[] $roles
  * @property Collection|UsersRating[] $users_ratings_where_rate_by
  * @property Collection|UsersRating[] $users_ratings
  *
  * @package App\Models\Base
  */
-class User extends Authenticatable
+class User extends BaseModel
 {
 	use FormatDates;
 	const ID = 'id';
@@ -81,7 +81,12 @@ class User extends Authenticatable
 	const OTP = 'otp';
 	const CREATED_AT = 'created_at';
 	const UPDATED_AT = 'updated_at';
-	const USER_PROFILE_U_ID = 'user_profile_u_id';
+	const FIRST_NAME = 'first_name';
+	const LAST_NAME = 'last_name';
+	const NATIONAL_ID = 'national_id';
+	const COUNTY = 'county';
+	const PHOTO_URL = 'photo_url';
+	const INITIALS = 'initials';
 	protected $connection = 'mysql';
 	protected $table = 'users';
 
@@ -97,11 +102,6 @@ class User extends Authenticatable
 		self::CREATED_AT,
 		self::UPDATED_AT
 	];
-
-	public function user_profile(): BelongsTo
-	{
-		return $this->belongsTo(UserProfile::class, \App\Models\User::USER_PROFILE_U_ID, UserProfile::U_ID);
-	}
 
 	public function blog_comments(): HasMany
 	{
@@ -125,12 +125,12 @@ class User extends Authenticatable
 
 	public function order_status_clients(): HasMany
 	{
-		return $this->hasMany(OrderStatusClient::class, OrderStatusClient::USER_U_ID, User::U_ID);
+		return $this->hasMany(OrderStatusClient::class, OrderStatusClient::USER_U_ID, ModelsUser::U_ID);
 	}
 
 	public function projects_clients(): HasMany
 	{
-		return $this->hasMany(ProjectsClient::class, ProjectsClient::USER_U_ID, User::U_ID);
+		return $this->hasMany(ProjectsClient::class, ProjectsClient::USER_U_ID, ModelsUser::U_ID);
 	}
 
 	public function business_profiles(): BelongsToMany
