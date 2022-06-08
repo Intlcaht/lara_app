@@ -13,6 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends BaseUser implements FilamentUser, HasAvatar, HasName, MustVerifyEmail
@@ -23,6 +25,12 @@ class User extends BaseUser implements FilamentUser, HasAvatar, HasName, MustVer
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+
+
+    public function role_names()
+    {
+        return $this->roles->pluck('name');
+    }
 
     public function canAccessFilament(): bool
     {
@@ -59,6 +67,9 @@ class User extends BaseUser implements FilamentUser, HasAvatar, HasName, MustVer
         'remember_token',
         'two_factor_recovery_codes',
         'two_factor_secret',
+        'email_verified_at',
+        'two_factor_confirmed_at',
+        'two_factor_enabled'
     ];
 
     /**

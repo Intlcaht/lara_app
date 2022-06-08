@@ -19,9 +19,7 @@
             {{ $tag }}
         @endforeach
 
-        @if ($favicon = config('filament.favicon'))
-            <link rel="icon" href="{{ $favicon }}">
-        @endif
+        <link rel="shortcut icon" type="image/png" href="{{ asset("images/favicon.ico") }}" />
 
         <title>{{ $title ? "{$title} - " : null }} {{ config('app.name') }}</title>
 

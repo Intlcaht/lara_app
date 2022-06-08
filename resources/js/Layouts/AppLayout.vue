@@ -33,13 +33,13 @@ const logout = () => {
     <div>
         <AppHead :title="title">
             <meta head-key="description" name="description" content="This is the default description" />
+            <link rel="stylesheet" type="text/css" href="/css/custom.css" />
 
         </AppHead>
-
         <JetBanner />
 
         <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
+            <nav class="bg-white border-b border-gray-100 shadow-2xl">
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">

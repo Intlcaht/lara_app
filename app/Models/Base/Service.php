@@ -30,7 +30,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class Service
- * 
+ *
  * @property int $id
  * @property string $u_id
  * @property Carbon|null $created_at
@@ -42,7 +42,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property int|null $expected_delivery
  * @property float $location_lat
  * @property float $location_long
- * 
+ *
  * @property Collection|BusinessProfile[] $business_profiles
  * @property Collection|Commission[] $commissions
  * @property Collection|FAQ[] $f_a_q_s
@@ -68,7 +68,6 @@ class Service extends BaseModel
 	const CREATED_AT = 'created_at';
 	const UPDATED_AT = 'updated_at';
 	const DELETED_AT = 'deleted_at';
-	const USER_U_ID = 'user_u_id';
 	const TITLE = 'title';
 	const DESCRIPTION = 'description';
 	const EXPECTED_DELIVERY = 'expected_delivery';
@@ -91,68 +90,68 @@ class Service extends BaseModel
 
 	public function business_profiles(): BelongsToMany
 	{
-		return $this->belongsToMany(BusinessProfile::class, 'business_profile_service', BusinessProfile::SERVICESID, BusinessProfile::BUSINESS_PROFILESID)
+		return $this->belongsToMany(BusinessProfile::class, 'business_profile_service', BusinessProfileService::SERVICES_ID, BusinessProfileService::BUSINESS_PROFILES_ID)
 					->withPivot(BusinessProfileService::ID, BusinessProfileService::U_ID, BusinessProfileService::DELETED_AT)
 					->withTimestamps();
 	}
 
 	public function commissions(): HasMany
 	{
-		return $this->hasMany(Commission::class, Commission::SERVICE_U_ID, Commission::U_ID);
+		return $this->hasMany(Commission::class, Commission::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function f_a_q_s(): HasMany
 	{
-		return $this->hasMany(FAQ::class, FAQ::SERVICE_U_ID, FAQ::U_ID);
+		return $this->hasMany(FAQ::class, FAQ::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function order_statuses_where_service(): HasMany
 	{
-		return $this->hasMany(OrderStatus::class, OrderStatus::SERVICES_U_ID, OrderStatus::U_ID);
+		return $this->hasMany(OrderStatus::class, OrderStatus::SERVICES_U_ID, Service::U_ID);
 	}
 
 	public function orders(): HasMany
 	{
-		return $this->hasMany(Order::class, Order::SERVICE_U_ID, Order::U_ID);
+		return $this->hasMany(Order::class, Order::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function payments(): HasMany
 	{
-		return $this->hasMany(Payment::class, Payment::SERVICE_U_ID, Payment::U_ID);
+		return $this->hasMany(Payment::class, Payment::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function service_category_service_joints(): HasMany
 	{
-		return $this->hasMany(ServiceCategoryServiceJoint::class, ServiceCategoryServiceJoint::SERVICE_U_ID, ServiceCategoryServiceJoint::U_ID);
+		return $this->hasMany(ServiceCategoryServiceJoint::class, ServiceCategoryServiceJoint::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function service_notifications(): HasMany
 	{
-		return $this->hasMany(ServiceNotification::class, ServiceNotification::SERVICE_U_ID, ServiceNotification::U_ID);
+		return $this->hasMany(ServiceNotification::class, ServiceNotification::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function service_packages(): HasMany
 	{
-		return $this->hasMany(ServicePackage::class, ServicePackage::SERVICE_U_ID, ServicePackage::U_ID);
+		return $this->hasMany(ServicePackage::class, ServicePackage::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function service_requirements(): HasMany
 	{
-		return $this->hasMany(ServiceRequirement::class, ServiceRequirement::SERVICE_U_ID, ServiceRequirement::U_ID);
+		return $this->hasMany(ServiceRequirement::class, ServiceRequirement::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function service_reviews(): HasMany
 	{
-		return $this->hasMany(ServiceReview::class, ServiceReview::SERVICE_U_ID, ServiceReview::U_ID);
+		return $this->hasMany(ServiceReview::class, ServiceReview::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function service_tire_packages(): HasMany
 	{
-		return $this->hasMany(ServiceTirePackage::class, ServiceTirePackage::SERVICE_U_ID, ServiceTirePackage::U_ID);
+		return $this->hasMany(ServiceTirePackage::class, ServiceTirePackage::SERVICE_U_ID, Service::U_ID);
 	}
 
 	public function service_tires(): HasMany
 	{
-		return $this->hasMany(ServiceTire::class, ServiceTire::SERVICE_U_ID, ServiceTire::U_ID);
+		return $this->hasMany(ServiceTire::class, ServiceTire::SERVICE_U_ID, Service::U_ID);
 	}
 }

@@ -7,11 +7,11 @@ use App\Models\Base\UserReview as BaseUserReview;
 class UserReview extends BaseUserReview
 {
 	protected $fillable = [
-		self::UID,
+		self::U_ID,
 		self::ILLUSTRATION,
 		self::PHOTO_URL,
 		self::USER_U_ID,
-		self::PARENT_REVIEWID,
+		self::PARENT_REVIEW_ID,
 		self::UPVOTES,
 		self::STATUS
 	];

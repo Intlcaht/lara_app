@@ -18,7 +18,7 @@ class ProjectTask extends BaseProjectTask
 		self::TIMELINE_START,
 		self::TIMELINE_END,
 		self::STATUS_LABEL,
-		self::PROJECT_STATUS_LABELSID,
+		self::PROJECT_STATUS_LABELS_ID,
 		self::ESTIMATED_TIME_START,
 		self::ESTIMATED_TIME_END,
 		self::COMPLETED,

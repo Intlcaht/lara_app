@@ -8,7 +8,7 @@ class BusinessProfileService extends BaseBusinessProfileService
 {
 	protected $fillable = [
 		self::U_ID,
-		self::BUSINESS_PROFILESID,
-		self::SERVICESID
+		self::BUSINESS_PROFILES_ID,
+		self::SERVICES_ID
 	];
 }

@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    h1 {
+        @apply text-2xl;
+    }
+
+    h2 {
+        @apply text-xl;
+    }
+
+    p {
+        @apply text-base antialiased not-italic font-medium text-left normal-case break-normal px-2.5 py-2 bg-white text-gray-900 border-4 border-transparent dark:text-opacity-90 ring ring-4 ring-transparent dark:bg-white dark:text-gray-900;
+    }
+}
+
+@layer components {
+
+    .btn-blue {
+        @apply bg-blue-500 hover: bg-blue-700 text-white font-bold py-2 px-4 rounded;
+    }
+
+    .resource {
+        @apply grid grid-rows-1 min-h-screen min-w-max;
+        @apply grid-cols-[0.18fr_0.57fr_0.25fr];
+        @apply overflow-y-hidden;
+
+        .sidebar {
+            @apply row-span-full col-start-1 col-end-2;
+            @apply overflow-y-auto shadow-2xl py-6;
+        }
+
+        .meta {
+            @apply row-span-full col-start-3 col-end-4;
+            @apply overflow-y-auto bg-surface shadow-2xl;
+        }
+
+        .main {
+            @apply row-start-1 row-end-2 col-start-2 col-end-3;
+            @apply flex flex-col;
+            @apply overflow-y-auto;
+
+            .slot {
+                @apply flex-grow py-2 px-4;
+            }
+        }
+    }
+
+    .nav-item {
+        ul>li>a {
+            @apply hover:bg-gray-500/5 focus:bg-gray-500/5 dark:text-gray-300
+        }
+    }
+
+    .footer {
+        @apply text-white py-4;
+    }
+
+    .meta {}
+}
+
+@layer utilities {
+    .filter-none {
+        filter: none;
+    }
+
+    .filter-grayscale {
+        filter: grayscale(100%);
+    }
+
+    .bg-surface {
+        background-color: #fff;
+    }
+    .bg-bg {
+        background-color: #efefef;
+    }
+    .bg-primary {
+        background-color: #1a73e8;
+    }
+}

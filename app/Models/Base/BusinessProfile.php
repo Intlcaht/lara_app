@@ -32,9 +32,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  *
  * @property int $id
  * @property string $u_id
- * @property float|null $cap_percentage
  * @property string|null $escrow_u_id
  * @property string $service_notifier_user_u_id
+ * @property float|null $cap_percentage
  * @property bool $is_online
  * @property string $address
  * @property string $title
@@ -46,7 +46,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string $terms_and_conditions
  *
  * @property Escrow|null $escrow
- * @property UserBusinessProfile $service_notifier_user
+ * @property User $service_notifier_user
  * @property Collection|Blog[] $blogs
  * @property Collection|BusinessAttachment[] $business_attachments
  * @property Collection|BusinessProfileAdapter[] $business_profile_adapters_where_profile
@@ -64,9 +64,9 @@ class BusinessProfile extends BaseModel
 	use FormatDates;
 	const ID = 'id';
 	const U_ID = 'u_id';
-	const CAP_PERCENTAGE = 'cap_percentage';
 	const ESCROW_U_ID = 'escrow_u_id';
 	const SERVICE_NOTIFIER_USER_U_ID = 'service_notifier_user_u_id';
+	const CAP_PERCENTAGE = 'cap_percentage';
 	const IS_ONLINE = 'is_online';
 	const ADDRESS = 'address';
 	const TITLE = 'title';
@@ -97,7 +97,7 @@ class BusinessProfile extends BaseModel
 
 	public function service_notifier_user(): BelongsTo
 	{
-		return $this->belongsTo(UserBusinessProfile::class, \App\Models\BusinessProfile::SERVICE_NOTIFIER_USER_U_ID, UserBusinessProfile::U_ID);
+		return $this->belongsTo(User::class, \App\Models\BusinessProfile::SERVICE_NOTIFIER_USER_U_ID, User::U_ID);
 	}
 
 	public function blogs(): HasMany
@@ -107,12 +107,12 @@ class BusinessProfile extends BaseModel
 
 	public function business_attachments(): HasMany
 	{
-		return $this->hasMany(BusinessAttachment::class, BusinessAttachment::BUSINESS_PROFILE_U_ID, BusinessAttachment::U_ID);
+		return $this->hasMany(BusinessAttachment::class, BusinessAttachment::BUSINESS_PROFILE_U_ID, BusinessProfile::U_ID);
 	}
 
 	public function business_profile_adapters_where_profile(): HasMany
 	{
-		return $this->hasMany(BusinessProfileAdapter::class, BusinessProfileAdapter::PROFILE_U_ID, BusinessProfileAdapter::U_ID);
+		return $this->hasMany(BusinessProfileAdapter::class, BusinessProfileAdapter::PROFILE_U_ID, BusinessProfile::U_ID);
 	}
 
 	public function services(): BelongsToMany
@@ -124,7 +124,7 @@ class BusinessProfile extends BaseModel
 
 	public function order_status_business_profiles_where_profile(): HasMany
 	{
-		return $this->hasMany(OrderStatusBusinessProfile::class, OrderStatusBusinessProfile::PROFILE_U_ID, OrderStatusBusinessProfile::U_ID);
+		return $this->hasMany(OrderStatusBusinessProfile::class, OrderStatusBusinessProfile::PROFILE_U_ID, BusinessProfile::U_ID);
 	}
 
 	public function orders(): HasMany

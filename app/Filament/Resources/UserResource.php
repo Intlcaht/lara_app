@@ -29,14 +29,13 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-               // \App\Tables\Columns\User::make()->label('ID'),
+                // \App\Tables\Columns\User::make()->label('ID'),
+                Tables\Columns\TextColumn::make(User::FIRST_NAME),
+                Tables\Columns\TextColumn::make(User::LAST_NAME),
                 Tables\Columns\TextColumn::make(User::EMAIL),
                 Tables\Columns\TextColumn::make(User::STATUS),
-                Tables\Columns\TagsColumn::make('role_names')
-                    ->label("Roles")
-                    ->separator(',')
-                    ->searchable()
-
+                // \App\Tables\Columns\Tags::make('role_names')
+                //     ->label("Roles")
             ])
             ->filters([
                 //

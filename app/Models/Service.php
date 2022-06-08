@@ -8,7 +8,6 @@ class Service extends BaseService
 {
 	protected $fillable = [
 		self::U_ID,
-		self::USER_U_ID,
 		self::TITLE,
 		self::DESCRIPTION,
 		self::EXPECTED_DELIVERY,

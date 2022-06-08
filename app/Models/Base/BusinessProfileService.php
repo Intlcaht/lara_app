@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class BusinessProfileService
- * 
+ *
  * @property int $id
  * @property string $u_id
  * @property Carbon|null $created_at
@@ -27,7 +27,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property string|null $deleted_at
  * @property int $business_profilesId
  * @property int $servicesId
- * 
+ *
  * @property BusinessProfile $business_profiles_id
  * @property Service $services_id
  * @property Collection|ServiceReview[] $service_reviews
@@ -50,8 +50,8 @@ class BusinessProfileService extends BaseModel
 
 	protected $casts = [
 		self::ID => 'int',
-		self::BUSINESS_PROFILESID => 'int',
-		self::SERVICESID => 'int'
+		self::BUSINESS_PROFILES_ID => 'int',
+		self::SERVICES_ID => 'int'
 	];
 
 	protected $dates = [
@@ -61,16 +61,16 @@ class BusinessProfileService extends BaseModel
 
 	public function business_profiles_id(): BelongsTo
 	{
-		return $this->belongsTo(BusinessProfile::class, BusinessProfileService::BUSINESS_PROFILESID);
+		return $this->belongsTo(BusinessProfile::class, BusinessProfileService::BUSINESS_PROFILES_ID);
 	}
 
 	public function services_id(): BelongsTo
 	{
-		return $this->belongsTo(Service::class, BusinessProfileService::SERVICESID);
+		return $this->belongsTo(Service::class, BusinessProfileService::SERVICES_ID);
 	}
 
 	public function service_reviews(): HasMany
 	{
-		return $this->hasMany(ServiceReview::class, ServiceReview::BUSINESS_PROFILE_SERVICE_U_ID, ServiceReview::U_ID);
+		return $this->hasMany(ServiceReview::class, ServiceReview::BUSINESS_PROFILE_SERVICE_U_ID, BusinessProfileService::U_ID);
 	}
 }

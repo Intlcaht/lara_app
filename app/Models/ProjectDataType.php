@@ -11,7 +11,7 @@ class ProjectDataType extends BaseProjectDataType
 		self::TAG,
 		self::TYPE,
 		self::VALUE,
-		self::PROJECT_TASKSID,
-		self::TAG_TYPESID
+		self::PROJECT_TASKS_ID,
+		self::TAG_TYPES_ID
 	];
 }

@@ -15,6 +15,6 @@ class OrderStatus extends BaseOrderStatus
 		self::CLIENT_COLLABORATION_ALLOWED,
 		self::STATUS_COMMAND,
 		self::REQUIRES_CLIENT_LOCATION,
-		self::BID_ORDER_STATUS_PROVIDERS_U_ID
+		self::BID_ORDER_STATUS_PROVIDERS_U__ID
 	];
 }

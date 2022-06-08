@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Filament\Resources\BusinessProfileAdapterResource;
 use App\Filament\Resources\BusinessProfileAdapterTransactionResource;
 use App\Filament\Resources\BusinessProfileResource;
+use App\Filament\Resources\ServiceResource;
 use App\Filament\Resources\ServiceTagResource;
 use App\Filament\Resources\Shield\RoleResource;
 use App\Filament\Resources\UserResource;
@@ -68,6 +69,7 @@ class AppServiceProvider extends ServiceProvider
                     'Provider',
                     array_merge(
                         BusinessProfileResource::getNavigationItems(),
+                        ServiceResource::getNavigationItems()
                     )
                 )
                 ->group('Adapters', array_merge(

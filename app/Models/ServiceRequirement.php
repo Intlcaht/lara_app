@@ -10,7 +10,7 @@ class ServiceRequirement extends BaseServiceRequirement
 		self::U_ID,
 		self::TITLE,
 		self::DESCRIPTION,
-		self::PARENT_REQUIREMENTSID,
+		self::PARENT_REQUIREMENTS_ID,
 		self::SERVICE_U_ID
 	];
 }
